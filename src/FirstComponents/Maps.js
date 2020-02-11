@@ -10,32 +10,30 @@ const geolocateStyle = {
   margin: 10
 };
 
-const cities = [
-
-]
-
-export class Markers extends React.Component{
+class Markers extends React.Component{
   constructor(props){
     super(props);
   }
 
-  setActivite (activites) {
-    this.setState({activites: activites})
-  }
   render(){
+    const {list} = this.props
     return(
-      cities.map(
-        city => <Marker key={city.id} longitude={city.longitude} latitude={city.latitude} show={this.handleShow}><p>{city.name}</p></Marker>
-      )
+      list.map( city => {
+        let result = city.active ? <Marker key={city.id} longitude={city.longitude} latitude={city.latitude}><p>{city.title}</p></Marker> : ''
+        return result
+      })
     )
   }
 }
 
 class Maps extends Component {
+  constructor (props) {
+    super(props)
+  }
   state = {
     viewport: {
-      latitude: 48.938236499999995,
-      longitude: 2.6074297,
+      latitude: 48.851343799999995,
+      longitude: 2.4205886,
       zoom: 16,
       bearing: 0,
       pitch: 0
@@ -62,7 +60,7 @@ class Maps extends Component {
             positionOptions={{enableHighAccuracy: true}}
             trackUserLocation={true}
           />
-          <Markers data={cities} className="filter-item vege"/>
+          <Markers list={this.props.list} className="filter-item vege"/>
         </MapGL>
       </div>
       

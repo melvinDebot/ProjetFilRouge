@@ -36,6 +36,12 @@ export class Isotope extends React.Component {
         >
           Restaurant
         </button>
+        <button
+          onClick={()=>{ this.filtre("Cinema") }}
+          className="tech"
+        >
+          Cinema
+        </button>
       </div>
     );
   }
