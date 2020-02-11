@@ -2,19 +2,17 @@ import React from 'react';
 import Isotope from './Isotope';
 
 class ButtonFilter extends React.Component{
-  state = {
-    show : false
+  constructor(props){
+    super(props);
   }
   handleClick = () => {
-    this.setState({show : true})
+    this.setState(state => ({
+      show : !state.show
+    }))
   }
   render(){
     return(
-      <>
-        <button className="button-filter" onClick={this.handleClick}></button>
-        {this.state.show ? <Isotope /> : ""}
-      </>
-      
+        <button className="button-filter" onClick={this.props.toogle}></button>
     )
   }
 }

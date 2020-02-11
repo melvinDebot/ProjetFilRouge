@@ -1,66 +1,41 @@
 import React from 'react';
-import Maps, {Markers} from './Maps';
+import {Markers} from './Maps';
+import { element } from 'prop-types';
 
 export class Isotope extends React.Component {
-  constructor() {
-    super();
-    this.handleClickAll = this.handleClickAll.bind(this);
+  constructor(props) {
+    super(props);
     this.handleClickTech = this.handleClickTech.bind(this);
-    this.handleClickPersonal = this.handleClickPersonal.bind(this);
-    this.state = {
-      isClickedAll: true,
-      isClickedTech: false,
-      isClickedPersonal: false
-    };
-  }
-
-  handleClickAll(e) {
-    this.setState({
-      isClickedAll: true,
-      isClickedTech: false,
-      isClickedPersonal: false
-    });
+    this.filtre = this.filtre.bind(this);
   }
 
   handleClickTech(e) {
-    this.setState({
-      isClickedAll: false,
-      isClickedTech: true,
-      isClickedPersonal: false
-    });
-    console.log(this.state.isClickedTech)
   }
 
-  handleClickPersonal(e) {
-    this.setState({
-      isClickedAll: false,
-      isClickedTech: false,
-      isClickedPersonal: true
+  filtre ( name ) {
+    const { list  } = this.props
+    let newList = list.map( element => {
+      if ( element.name === name)  {
+        element.active = element.active === true ? false : true
+        return element
+      } else {
+        return element
+      }
     });
+    console.log(newList)
+    this.props.setList(newList)
   }
+
 
   render() {
     return (
       <div className="all">
         <button
-          onClick={this.handleClickAll}
-        >
-          All
-        </button>
-        <button
-          onClick={this.handleClickTech}
+          onClick={()=>{ this.filtre("Restaurant") }}
           className="tech"
         >
-          Tech
+          Restaurant
         </button>
-        <button
-          onClick={this.handleClickPersonal}
-          className="personnal"
-        >
-          Personal
-        </button>
-        {this.state.isClickedTech ? <p>YOOO</p> : ""}
-        {this.state.isClickedPersonal ? <p>YEEEEE</p> : ""}
       </div>
     );
   }

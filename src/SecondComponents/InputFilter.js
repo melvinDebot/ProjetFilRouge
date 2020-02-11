@@ -16,7 +16,7 @@ class Input extends React.Component{
     }
   }
   handleClick = () => {
-    this.setState({ show : true})
+    this.setState({ show : true })
   }
   handleInput = (e) =>{
     console.log(e.target.value)

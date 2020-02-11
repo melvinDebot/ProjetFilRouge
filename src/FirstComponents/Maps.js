@@ -11,21 +11,21 @@ const geolocateStyle = {
 };
 
 const cities = [
-  {
-    id : 1,
-    name : "Restaurant",
-    longitude : 2.6091616,
-    latitude : 48.9383339
 
-  }
 ]
 
 export class Markers extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  setActivite (activites) {
+    this.setState({activites: activites})
+  }
   render(){
-    const {data} = this.props;
     return(
-      data.map(
-        city => <Marker key={city.id} longitude={city.longitude} latitude={city.latitude}><p>{city.name}</p></Marker>
+      cities.map(
+        city => <Marker key={city.id} longitude={city.longitude} latitude={city.latitude} show={this.handleShow}><p>{city.name}</p></Marker>
       )
     )
   }
